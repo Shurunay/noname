@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# Инструменты
+.pytest_cache/
+.ruff_cache/
+
+# Секреты — в репозиторий попадает только .env.example
+.env
+
+# Логи приложения
+logs/
+*.log

@@ -1,0 +1,47 @@
+[project]
+name = "logwatch"
+version = "0.1.0"
+description = "LogWatch — локальный консольный агрегатор и анализатор логов"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5",
+    "pytest>=8.0",
+]
+
+[project.scripts]
+logwatch = "logwatch.cli.app:app"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["logwatch*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E/F — базовые ошибки, I — сортировка импортов, B — типичные баги,
+# UP — современный синтаксис, N — именование, S — безопасность (bandit)
+select = ["E", "F", "I", "B", "UP", "N", "S"]
+ignore = ["B008"]  # Typer/FastAPI используют вызовы в значениях по умолчанию
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]  # assert в тестах допустим
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
